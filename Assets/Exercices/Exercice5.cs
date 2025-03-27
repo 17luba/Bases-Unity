@@ -12,8 +12,51 @@ public class Exercice5 : MonoBehaviour
      */
 
     // Code à compléter (ne rien modifier avant cette ligne)
-    
-    
-    
+
+    public float attractionForce = 5f;
+    public float destructionDistance = 3f;
+
+    void Update()
+    {
+        // Detect and attract objects
+        DetectAndAttractObjects();
+    }
+
+    void DetectAndAttractObjects()
+    {
+        // Get all colliders within a sphere of radius 'destructionDistance'
+        Collider[] colliders = Physics.OverlapSphere(transform.position, destructionDistance);
+
+        // Iterate through each collider
+        foreach (Collider collider in colliders)
+        {
+            // Check if the collider is not the black hole itself
+            if (collider.gameObject != gameObject)
+            {
+                // Attract the object towards the black hole
+                AttractObject(collider.gameObject);
+            }
+        }
+    }
+
+    void AttractObject(GameObject obj)
+    {
+        // Calculate the direction towards the black hole
+        Vector3 direction = transform.position - obj.transform.position;
+
+        // Apply a force towards the black hole
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.AddForce(direction.normalized * attractionForce * Time.deltaTime);
+        }
+
+        // Check if the object is within the destruction distance
+        if (direction.magnitude <= destructionDistance)
+        {
+            // Destroy the object
+            Destroy(obj);
+        }
+    }
     // Fin du code à compléter (ne rien modifier après cette ligne)
 }
