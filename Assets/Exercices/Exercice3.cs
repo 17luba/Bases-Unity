@@ -11,8 +11,8 @@ public class Exercice3 : MonoBehaviour
      */
 
     // Code à compléter (ne rien modifier avant cette ligne)
-    
-    
+
+  
 
     // Fin du code à compléter (ne rien modifier après cette ligne)
 }

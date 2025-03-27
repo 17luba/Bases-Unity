@@ -12,13 +12,22 @@ public class Exercice1 : MonoBehaviour
 
     // Code à compléter (ne rien modifier avant cette ligne)
 
-    private void Update()
+    // Variable pour stocker l'état de visibilité du cube
+    private bool isVisible = true;
+
+    // Méthode appelée à chaque frame pour détecter l'appui sur une touche
+    void Update()
     {
+        // Vérifie si la touche "Espace" est pressée
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            gameObject.SetActive(!gameObject.activeSelf);
+            // Change l'état de visibilité
+            isVisible = !isVisible;
+
+            // Active ou désactive le rendu du cube
+            GetComponent<Renderer>().enabled = isVisible;
         }
-    }    
+    }   
 
     // Fin du code à compléter (ne rien modifier après cette ligne)
 }
